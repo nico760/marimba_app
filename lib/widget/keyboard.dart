@@ -23,9 +23,21 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
 
   void playSong(String audioUrl) async {
     await audioPlayer.stop();
-    audioPlayer.setSourceAsset(audioUrl);
     await audioPlayer.resume();
   }
+
+  @override
+  void initState() {
+    audioPlayer.setSourceAsset(widget.sound);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     double keyHeight = (MediaQuery.of(context).size.height/7);
